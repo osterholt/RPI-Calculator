@@ -3,7 +3,7 @@ import java.util.UUID;
 
 public class TeamManager {
     private static TeamManager tm;
-    Arraylist<Team> teams;
+    ArrayList<Team> teams;
     private TeamManager() {
         teams = new ArrayList<>();
     }
@@ -26,7 +26,7 @@ public class TeamManager {
     }
     public Team getTeam(UUID teamID) {
         for(Team team : teams) {
-            if (team.getID().equals(teamID)) {
+            if (team.getId().equals(teamID)) {
                 return team;
             }
         }
@@ -40,7 +40,7 @@ public class TeamManager {
         }
         return null;
     }
-    public bool addOpps(Team team, ArrayList<Team> opponents) {
+    public boolean addOpps(Team team, ArrayList<Team> opponents) {
         for(Team opponent : opponents) {
             team.addOpponent(opponent);
         }

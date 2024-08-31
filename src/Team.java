@@ -25,10 +25,14 @@ public class Team {
     public boolean addOpponent(String teamName) {
         if (teamName != null && !teamName.isEmpty()) {
             // get team.
-            teamsPlayed.add(team);
+            Team opp = TeamManager.getInstance().getTeam(teamName);
+            teamsPlayed.add(opp);
             return true;
         }
         return false;
+    }
+    public boolean addOpponent(Team team) {
+        return teamsPlayed.add(team);
     }
     /**
      * (WP * 0.3) + (OWP * 0.4) + (OOWP * 0.3)

@@ -1,3 +1,5 @@
+package src;
+
 import java.io.FileReader; 
 import java.io.IOException; 
 import java.util.Scanner;
@@ -7,7 +9,7 @@ public class DataLoader {
     private static DataLoader dl;
     private String filename;
     private static String defaultFilename = "2023example.csv";
-    private static char delimeter = ",";
+    private static char delimeter = ',';
 
     private DataLoader() {
         filename = defaultFilename;
