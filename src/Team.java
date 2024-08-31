@@ -59,8 +59,6 @@ public class Team {
         return opponentOpponentWinPercentage / teamsPlayed.length;
     }
 
-
-    
     // Getters and Setters
     public UUID getId() {
         return id;
