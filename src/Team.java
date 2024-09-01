@@ -51,16 +51,24 @@ public class Team {
     public double getOpponentWinPercentage() {
         double opponentWinPercentage = 0.0;
         for (Team team : teamsPlayed) {
+            if(team == null)
+                continue;
+            if(team.teamsPlayed.isEmpty())
+                continue;
             opponentWinPercentage += team.getWinPercentage();
         }
-        return opponentWinPercentage / teamsPlayed.length;
+        return opponentWinPercentage / teamsPlayed.size();
     }
     private double getOppOpponentWinPercentage() {
         double opponentOpponentWinPercentage = 0.0;
         for (Team team : teamsPlayed) {
+            if(team == null)
+                continue;
+            if(team.teamsPlayed.isEmpty())
+                continue;
             opponentOpponentWinPercentage += team.getOpponentWinPercentage();
         }
-        return opponentOpponentWinPercentage / teamsPlayed.length;
+        return opponentOpponentWinPercentage / teamsPlayed.size();
     }
 
     // Getters and Setters
@@ -97,7 +105,7 @@ public class Team {
         else
             this.wins = 0;
     }
-    public Team[] getTeamsPlayed() {
+    public ArrayList<Team> getTeamsPlayed() {
         return teamsPlayed;
     }
 }

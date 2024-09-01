@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.UUID;
 
+import static java.lang.Double.NaN;
+
 public class TeamManager {
     private static TeamManager tm;
     ArrayList<Team> teams;
@@ -14,7 +16,7 @@ public class TeamManager {
     }
 
     public boolean addTeam(String teamName) {
-        addTeam(teamName, 0, 0);
+        return addTeam(teamName, 0, 0);
     }
     public boolean addTeam(String teamName, int gamesWon, int gamesLost) {
         for(Team team : teams) {
@@ -23,6 +25,7 @@ public class TeamManager {
             }
         }
         teams.add(new Team(teamName, gamesWon, gamesLost));
+        return true;
     }
     public Team getTeam(UUID teamID) {
         for(Team team : teams) {
@@ -42,13 +45,20 @@ public class TeamManager {
     }
     public boolean addOpps(Team team, ArrayList<Team> opponents) {
         for(Team opponent : opponents) {
-            team.addOpponent(opponent);
+            if(!team.addOpponent(opponent)) {
+                return false;
+            }
         }
+        return true;
     }
 
     public void printTeamsRPI() {
         for(Team team : teams) {
-            System.out.println(team.getName() + " RPI: " + team.calculateRPI());
+            double RPI;
+            if((RPI = team.calculateRPI()) == NaN)
+                System.out.println(team.getName() + " RPI cannot be calculated. ");
+            else
+                System.out.println(team.getName() + " RPI: " + team.calculateRPI());
         }
     }
 }

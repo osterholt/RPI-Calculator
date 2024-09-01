@@ -1,15 +1,12 @@
-package src;
-
-import java.io.FileReader; 
-import java.io.IOException; 
+import java.io.File;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class DataLoader {
     private static DataLoader dl;
     private String filename;
-    private static String defaultFilename = "2023example.csv";
-    private static char delimeter = ',';
+    private static String defaultFilename = "./dat/2023example.csv";
+    private static String delimeter = ",";
 
     private DataLoader() {
         filename = defaultFilename;
@@ -27,13 +24,15 @@ public class DataLoader {
     }
     public boolean loadData() {
         // Load data from filename
-        ArrayList csv = new ArrayList<String[]>();
+        ArrayList<String[]> csv = new ArrayList<String[]>();
         try {
             Scanner fileScanner = new Scanner(new File(filename));
             fileScanner.nextLine(); // Skip header
             while(fileScanner.hasNext()) {
                 String line = fileScanner.nextLine();
                 String[] lineDel = line.split(delimeter);
+                if(lineDel[0].equals("NULL"))
+                    continue;
                 csv.add(lineDel);
 
                 String teamName = lineDel[0];
@@ -50,6 +49,8 @@ public class DataLoader {
             Team team = TeamManager.getInstance().getTeam(teamName);
             ArrayList<Team> opponents = new ArrayList<>();
             for(int i = 3; i < row.length; i++) {
+                if(row[i].equals("NULL"))
+                    continue;
                 Team opponent = TeamManager.getInstance().getTeam(row[i]);
                 opponents.add(opponent);
             }
